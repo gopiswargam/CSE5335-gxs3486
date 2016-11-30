@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>my page</title>
+    <style>	
+    </style>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script>
+      var i=0;
+       function getData() {
+	     $("#dataarea").show();
+		 $("#gdata").hide();
+           var interval = setInterval(doit,500);
+           function doit() {
+               if(parseInt(i)==99){clearInterval(interval);}
+                  if(i%10==0){
+					$("#tdata").html("");
+				   }
+               i++;
+               var details="";
+               console.log(i);
+               $.get("http://localhost:3000/getData/"+i,{},function(response){
+                
+				    var address = response.address;
+                    var id = response.id;
+                    var name =  response.name;
+                    details ="<tr><td>"+id+"</td><td>"+address+"</td><td>"+name+"</td></tr>";
+                    $("#tdata").html( $("#tdata").html()+details);
+					
+               });
+
+           }
+
+       }
+
+
+    </script>
+    <!--<link rel='stylesheet' href='/stylesheets/style.css' />-->
+  </head>
+  <body>
+<div id="gdata" align="center">
+  <button class="btn btn-primary" style="margin:50px" onclick="getData()">GET DATA</button>
+ </div>
+  <div style="margin:40px;" hidden="true" id=dataarea>
+      <table class="table table-hover">
+        <thead>
+        <th>id</th>
+        <th>address</th>
+        <th>name</th>
+        </thead>
+        <tbody id="tdata"></tbody>
+      </table>
+</div>
+
+  </body>
+</html>
