@@ -2,20 +2,11 @@ var express = require('express');
 var _ = require('underscore');
 var router = express();
 var MongoClient = require('mongodb').MongoClient;
-var mongoose = require('mongoose');
 
 var assert = require('assert');
 var ObjectId = require('mongodb').ObjectID;
 var url = 'mongodb://gopi:gopi@ds115918.mlab.com:15918/webdata';
-mongoose.connect('mongodb://gopi:gopi@ds115918.mlab.com:15918/webdata', function(err){
-    if(!err){
-        console.log('connected to mongoDB');
 
-
-    } else{
-        throw err;
-    }
-});
 
 router.set('port', (process.env.PORT || 3000));
 
